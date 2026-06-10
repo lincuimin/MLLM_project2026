@@ -1,0 +1,17 @@
+{
+  "name": "douban_movie_search",
+  "start_url": "https://movie.douban.com/explore",
+  "instruction": "在页面中搜索电影“流浪地球”，如果已经进入搜索结果页或看到相关电影结果，请完成任务并给出简短说明。",
+  "max_steps": 6,
+  "evaluation": {
+    "suite": "basic_web_tasks",
+    "task_type": "search",
+    "difficulty": "easy",
+    "expected_result": "页面展示“流浪地球”相关电影搜索结果。",
+    "success_criteria": [
+      "页面中出现“流浪地球”相关结果",
+      "模型输出 finish",
+      "最终状态为 success"
+    ]
+  }
+}

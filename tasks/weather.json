@@ -1,0 +1,17 @@
+{
+  "name": "weather_city_search",
+  "start_url": "https://www.weather.com.cn/",
+  "instruction": "在中国天气网页面中查询“湛江”的天气。如果已经进入湛江天气详情或结果页面，请完成任务并给出简短说明。",
+  "max_steps": 6,
+  "evaluation": {
+    "suite": "basic_web_tasks",
+    "task_type": "search",
+    "difficulty": "easy",
+    "expected_result": "页面展示湛江天气详情或查询结果。",
+    "success_criteria": [
+      "页面中出现湛江天气信息",
+      "模型输出 finish",
+      "最终状态为 success"
+    ]
+  }
+}

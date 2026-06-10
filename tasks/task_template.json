@@ -1,0 +1,18 @@
+{
+  "name": "example_task_name",
+  "start_url": "https://example.com/",
+  "instruction": "用一句话写清楚希望 Agent 在网页中完成什么任务，以及什么情况下算完成。",
+  "max_steps": 8,
+  "evaluation": {
+    "suite": "basic_web_tasks",
+    "task_type": "search",
+    "difficulty": "easy",
+    "expected_result": "描述理想情况下最终页面或最终回答应该是什么。",
+    "success_criteria": [
+      "页面达到目标状态",
+      "模型输出 finish",
+      "最终状态为 success"
+    ],
+    "notes": "这里可以写人工复核时需要注意的点。"
+  }
+}

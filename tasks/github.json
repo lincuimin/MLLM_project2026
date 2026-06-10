@@ -1,0 +1,18 @@
+{
+  "name": "github_repo_search",
+  "start_url": "https://github.com/",
+  "instruction": "在 GitHub 页面上搜索开源项目“Qwen-VL”。如果页面已经展示相关仓库搜索结果，请完成任务并说明已到达结果页。",
+  "max_steps": 8,
+  "evaluation": {
+    "suite": "basic_web_tasks",
+    "task_type": "search",
+    "difficulty": "medium",
+    "expected_result": "GitHub 展示 Qwen-VL 相关仓库搜索结果。",
+    "success_criteria": [
+      "页面进入 GitHub 搜索结果",
+      "结果和 Qwen-VL 相关",
+      "模型输出 finish",
+      "最终状态为 success"
+    ]
+  }
+}
