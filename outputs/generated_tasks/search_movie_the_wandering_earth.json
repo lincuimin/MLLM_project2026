@@ -1,16 +1,16 @@
 {
   "name": "search_movie_the_wandering_earth",
   "start_url": "https://movie.douban.com/explore",
-  "instruction": "在豆瓣电影页面搜索电影《流浪地球》，找到该电影的详情页面并提取评分和简介，找到后输出 finish。",
+  "instruction": "在豆瓣电影页面搜索电影《流浪地球》，找到该电影的详情页面后停止任务。",
   "max_steps": 6,
   "evaluation": {
     "suite": "basic_web_tasks",
     "task_type": "search",
     "difficulty": "easy",
-    "expected_result": "页面显示《流浪地球》的电影详情页，包含评分、导演、主演及剧情简介等信息。",
+    "expected_result": "页面显示电影《流浪地球》的详细信息，包括评分、简介、演职员表等。",
     "success_criteria": [
-      "页面成功跳转至《流浪地球》详情页",
-      "页面中包含电影评分和剧情简介",
+      "页面URL包含电影ID或明确指向《流浪地球》详情页",
+      "页面标题或主要内容包含“流浪地球”字样",
       "模型输出 finish",
       "最终状态为 success"
     ]

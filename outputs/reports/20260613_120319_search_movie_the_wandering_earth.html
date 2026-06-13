@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>20260613_120319_search_movie_the_wandering_earth</title>
+  <style>
+    body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172033; background: #f6f7f9; }
+    header { padding: 24px 32px; background: #172033; color: #fff; }
+    main { padding: 24px 32px; max-width: 1180px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; font-size: 24px; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    .summary, .step { background: #fff; border: 1px solid #d8dee8; border-radius: 8px; padding: 16px; margin-bottom: 18px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; }
+    .label { color: #5d6b82; font-size: 13px; }
+    .value { margin-top: 2px; word-break: break-word; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 999px; background: #e9eef7; font-size: 13px; }
+    .badge.failed { background: #fde8e8; color: #9b1c1c; }
+    .badge.success { background: #def7ec; color: #03543f; }
+    img { max-width: 100%; border: 1px solid #d8dee8; border-radius: 6px; background: #fff; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #101828; color: #eef2ff; padding: 12px; border-radius: 6px; overflow: auto; }
+    .step-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+    .empty { color: #5d6b82; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>20260613_120319_search_movie_the_wandering_earth</h1>
+    <div>任务：search_movie_the_wandering_earth</div>
+  </header>
+  <main>
+    <section class="summary">
+      <h2>运行摘要</h2>
+      <div class="grid">
+        <div><div class="label">状态</div><div class="value"><span class="badge failed">failed</span></div></div>
+        <div><div class="label">失败类型</div><div class="value">执行失败</div></div>
+        <div><div class="label">最终 URL</div><div class="value">https://sec.douban.com/c?r=https%3A%2F%2Fmovie.douban.com%2Fsubject%2F26266893%2F&amp;_s=b569fce01d34d537d83e231ad927e3c1e492a39f15f6fd32820d6a52f7e15ec3&amp;a=1</div></div>
+        <div><div class="label">最终标题</div><div class="value">Loading https://movie.douban.com/subject/26266893/</div></div>
+        <div><div class="label">步数</div><div class="value">4</div></div>
+        <div><div class="label">耗时</div><div class="value">24.95 秒</div></div>
+      </div>
+    </section>
+    <section class="summary">
+      <h2>错误分析</h2>
+      <p>页面正在导航时采集元素，Playwright 的 JS 上下文被销毁。建议在动作后等待页面稳定，并对页面观察增加重试。</p>
+      <pre>Page.evaluate: Execution context was destroyed, most likely because of a navigation</pre>
+    </section>
+    <section>
+      <h2>操作轨迹</h2>
+      <article class="step">
+  <div class="step-head">
+    <h2>Step 1</h2>
+    <span class="badge">success</span>
+  </div>
+  <div class="grid">
+    <div><div class="label">动作前 URL</div><div class="value">https://movie.douban.com/explore</div></div>
+    <div><div class="label">动作后 URL</div><div class="value">https://movie.douban.com/explore</div></div>
+    <div><div class="label">页面标题</div><div class="value">选电影</div></div>
+    <div><div class="label">执行结果</div><div class="value">点击元素 #15: 搜索电影、电视剧、综艺、影人</div></div>
+  </div>
+  <h2>截图</h2>
+  <img src="../screenshots/20260613_120319_search_movie_the_wandering_earth/step_01.png" alt="step 1 screenshot">
+  <h2>模型决策</h2>
+  <pre>{
+  &quot;action&quot;: &quot;click&quot;,
+  &quot;element_id&quot;: 15
+}</pre>
+  <h2>执行动作</h2>
+  <pre>{
+  &quot;action&quot;: &quot;click&quot;,
+  &quot;element_id&quot;: 15
+}</pre>
+</article>
+<article class="step">
+  <div class="step-head">
+    <h2>Step 2</h2>
+    <span class="badge">success</span>
+  </div>
+  <div class="grid">
+    <div><div class="label">动作前 URL</div><div class="value">https://movie.douban.com/explore</div></div>
+    <div><div class="label">动作后 URL</div><div class="value">https://movie.douban.com/explore</div></div>
+    <div><div class="label">页面标题</div><div class="value">选电影</div></div>
+    <div><div class="label">执行结果</div><div class="value">向元素 #15 输入: 流浪地球</div></div>
+  </div>
+  <h2>截图</h2>
+  <img src="../screenshots/20260613_120319_search_movie_the_wandering_earth/step_02.png" alt="step 2 screenshot">
+  <h2>模型决策</h2>
+  <pre>{
+  &quot;action&quot;: &quot;type&quot;,
+  &quot;element_id&quot;: 15,
+  &quot;text&quot;: &quot;流浪地球&quot;
+}</pre>
+  <h2>执行动作</h2>
+  <pre>{
+  &quot;action&quot;: &quot;type&quot;,
+  &quot;element_id&quot;: 15,
+  &quot;text&quot;: &quot;流浪地球&quot;
+}</pre>
+</article>
+<article class="step">
+  <div class="step-head">
+    <h2>Step 3</h2>
+    <span class="badge">success</span>
+  </div>
+  <div class="grid">
+    <div><div class="label">动作前 URL</div><div class="value">https://movie.douban.com/explore</div></div>
+    <div><div class="label">动作后 URL</div><div class="value">https://search.douban.com/movie/subject_search?search_text=%E6%B5%81%E6%B5%AA%E5%9C%B0%E7%90%83&amp;cat=1002</div></div>
+    <div><div class="label">页面标题</div><div class="value">选电影</div></div>
+    <div><div class="label">执行结果</div><div class="value">点击元素 #16: 搜索</div></div>
+  </div>
+  <h2>截图</h2>
+  <img src="../screenshots/20260613_120319_search_movie_the_wandering_earth/step_03.png" alt="step 3 screenshot">
+  <h2>模型决策</h2>
+  <pre>{
+  &quot;action&quot;: &quot;click&quot;,
+  &quot;element_id&quot;: 16
+}</pre>
+  <h2>执行动作</h2>
+  <pre>{
+  &quot;action&quot;: &quot;click&quot;,
+  &quot;element_id&quot;: 16
+}</pre>
+</article>
+<article class="step">
+  <div class="step-head">
+    <h2>Step 4</h2>
+    <span class="badge">success</span>
+  </div>
+  <div class="grid">
+    <div><div class="label">动作前 URL</div><div class="value">https://search.douban.com/movie/subject_search?search_text=%E6%B5%81%E6%B5%AA%E5%9C%B0%E7%90%83&amp;cat=1002</div></div>
+    <div><div class="label">动作后 URL</div><div class="value">https://sec.douban.com/c?r=https%3A%2F%2Fmovie.douban.com%2Fsubject%2F26266893%2F&amp;_s=b569fce01d34d537d83e231ad927e3c1e492a39f15f6fd32820d6a52f7e15ec3&amp;a=1</div></div>
+    <div><div class="label">页面标题</div><div class="value">流浪地球 - 电影 - 豆瓣搜索</div></div>
+    <div><div class="label">执行结果</div><div class="value">点击元素 #26: 流浪地球‎ (2019)</div></div>
+  </div>
+  <h2>截图</h2>
+  <img src="../screenshots/20260613_120319_search_movie_the_wandering_earth/step_04.png" alt="step 4 screenshot">
+  <h2>模型决策</h2>
+  <pre>{
+  &quot;action&quot;: &quot;click&quot;,
+  &quot;element_id&quot;: 26
+}</pre>
+  <h2>执行动作</h2>
+  <pre>{
+  &quot;action&quot;: &quot;click&quot;,
+  &quot;element_id&quot;: 26
+}</pre>
+</article>
+    </section>
+  </main>
+</body>
+</html>

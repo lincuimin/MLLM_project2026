@@ -164,12 +164,13 @@ python -m app.main --command "在 GitHub 页面上搜索开源项目 Qwen-VL"
 outputs/screenshots/<run_id>/step_01.png
 outputs/screenshots/<run_id>/step_02.png
 outputs/logs/<run_id>.json
+outputs/reports/<run_id>.html
 outputs/evaluations/runs.jsonl
 outputs/evaluations/runs.csv
 outputs/generated_tasks/<task_name>.json
 ```
 
-日志中会记录任务状态、每一步截图、模型决策、执行结果和最终回答。
+日志中会记录任务状态、每一步截图、模型决策、执行结果和最终回答。HTML 报告会把截图序列、动作序列和错误分析放在同一个页面里，适合人工复盘。
 
 ## 任务日志和评测集
 
@@ -213,10 +214,39 @@ outputs/evaluations/runs.csv
 耗时
 最终 URL
 最终回答
+失败类型
+错误分析
 完整日志路径
+HTML 轨迹报告路径
 首张和末张截图路径
 模型名称
 浏览器模式
+```
+
+失败类型会被归为三类：
+
+```text
+识别失败：模型输出无法和当前页面元素稳定对应，例如 element_id 不存在、动作 JSON 不合法。
+规划失败：模型没有在最大步数内完成任务，或反复执行无效动作、页面长时间停留不前。
+执行失败：浏览器动作、页面跳转、Playwright 调用或模型 API 调用失败，例如 429、403、timeout、导航中断。
+```
+
+HTML 轨迹报告保存在：
+
+```text
+outputs/reports/<run_id>.html
+```
+
+报告包含：
+
+```text
+运行摘要
+失败类型
+错误分析
+每一步截图
+每一步模型决策 JSON
+每一步实际执行动作和执行结果
+动作前后的 URL 和标题
 ```
 
 新增任务时，可以复制 `tasks/task_template.json`，然后修改：

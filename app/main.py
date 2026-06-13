@@ -9,11 +9,11 @@ from typing import Any
 if __package__ in {None, ""}:
     sys.path.append(str(Path(__file__).resolve().parents[1]))
     from app.config import get_settings
-    from app.evaluation import append_evaluation_record, build_evaluation_record
+    from app.evaluation import append_evaluation_record, build_evaluation_record, generate_trace_report
     from app.task_generator import TaskGenerator, save_generated_task
 else:
     from .config import get_settings
-    from .evaluation import append_evaluation_record, build_evaluation_record
+    from .evaluation import append_evaluation_record, build_evaluation_record, generate_trace_report
     from .task_generator import TaskGenerator, save_generated_task
 
 
@@ -37,6 +37,8 @@ def run_task(task_file: Path) -> dict[str, Any]:
         max_steps=task.get("max_steps"),
     )
     evaluation_record = build_evaluation_record(summary, task, task_file, settings)
+    report_path = generate_trace_report(summary, evaluation_record, settings)
+    evaluation_record["report_path"] = str(report_path)
     evaluation_paths = append_evaluation_record(evaluation_record, settings)
     summary["evaluation"] = {
         "record": evaluation_record,
@@ -67,6 +69,8 @@ def run_command(command: str) -> dict[str, Any]:
         max_steps=task.get("max_steps"),
     )
     evaluation_record = build_evaluation_record(summary, task, task_file, settings)
+    report_path = generate_trace_report(summary, evaluation_record, settings)
+    evaluation_record["report_path"] = str(report_path)
     evaluation_paths = append_evaluation_record(evaluation_record, settings)
     summary["generated_task_file"] = str(task_file)
     summary["generated_task"] = task

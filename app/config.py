@@ -10,6 +10,7 @@ OUTPUT_DIR = PROJECT_ROOT / "outputs"
 SCREENSHOT_DIR = OUTPUT_DIR / "screenshots"
 LOG_DIR = OUTPUT_DIR / "logs"
 EVALUATION_DIR = OUTPUT_DIR / "evaluations"
+REPORT_DIR = OUTPUT_DIR / "reports"
 
 
 @dataclass(frozen=True)
@@ -31,6 +32,7 @@ class Settings:
     screenshot_dir: Path
     log_dir: Path
     evaluation_dir: Path
+    report_dir: Path
 
 
 def load_env_file(env_path: Path | None = None) -> None:
@@ -83,6 +85,7 @@ def get_settings(require_api_key: bool = True) -> Settings:
         screenshot_dir=SCREENSHOT_DIR,
         log_dir=LOG_DIR,
         evaluation_dir=EVALUATION_DIR,
+        report_dir=REPORT_DIR,
     )
 
     ensure_output_dirs(settings)
@@ -94,6 +97,7 @@ def ensure_output_dirs(settings: Settings) -> None:
     settings.screenshot_dir.mkdir(parents=True, exist_ok=True)
     settings.log_dir.mkdir(parents=True, exist_ok=True)
     settings.evaluation_dir.mkdir(parents=True, exist_ok=True)
+    settings.report_dir.mkdir(parents=True, exist_ok=True)
 
 
 def _env_int(name: str, default: int) -> int:
