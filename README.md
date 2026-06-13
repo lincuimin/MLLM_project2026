@@ -43,7 +43,7 @@ MLLM_project/
 | `app/actions.py` | 动作定义与执行模块。支持 `click`、`type`、`press`、`scroll`、`wait`、`finish`，优先通过 `element_id` 定位元素。 |
 | `app/observation.py` | 页面观察模块。负责提取当前视口内的可操作元素、分配 `element_id`，并生成带彩色编号框的截图。 |
 | `app/evaluation.py` | 评测记录模块。每次任务结束后自动把运行摘要追加到 `outputs/evaluations/runs.jsonl` 和 `runs.csv`。 |
-| `app/config.py` | 新版配置模块。读取 `.env` 或系统环境变量，管理模型配置、浏览器配置和输出目录。 |
+| `app/config.py` | 新版配置模块。读取 `.env.example` 或系统环境变量，管理模型配置、浏览器配置和输出目录。 |
 | `config.py` | 兼容旧 demo 的配置入口。新代码优先使用 `app/config.py`。 |
 | `tasks/douban.json` | 豆瓣电影搜索示例任务。 |
 | `tasks/github.json` | GitHub 仓库搜索示例任务。 |
@@ -53,7 +53,7 @@ MLLM_project/
 | `outputs/logs/` | 每次任务运行的 JSON 日志输出目录。 |
 | `outputs/evaluations/` | 自动评测结果输出目录。包含可累积的 JSONL 和 CSV 结果表。 |
 | `requirements.txt` | Python 依赖列表。 |
-| `.env.example` | 本地环境变量模板。复制为 `.env` 后填写自己的模型 API Key。 |
+| `.env.example` | 本地环境变量配置文件。填写自己的模型 API Key 后即可运行。 |
 | `.gitignore` | 忽略本地密钥、缓存文件、运行截图和日志。 |
 
 ## 早期实验脚本
@@ -77,13 +77,7 @@ pip install -r requirements.txt
 playwright install
 ```
 
-复制环境变量模板：
-
-```bash
-copy .env.example .env
-```
-
-然后在 `.env` 中填入自己的模型配置：
+然后在 `.env.example` 中填入自己的模型配置：
 
 ```env
 VLM_API_KEY=your_real_api_key
@@ -103,7 +97,7 @@ OBSERVATION_MAX_ELEMENTS=80
 
 ## 使用 Google Chrome
 
-默认情况下，Playwright 会使用自带的 Chromium。如果只想改成系统安装的 Google Chrome，可以在 `.env` 中设置：
+默认情况下，Playwright 会使用自带的 Chromium。如果只想改成系统安装的 Google Chrome，可以在 `.env.example` 中设置：
 
 ```env
 BROWSER_CHANNEL=chrome
@@ -115,7 +109,7 @@ BROWSER_CHANNEL=chrome
 
 ```text
 1. 先手动启动一个带远程调试端口的 Chrome。
-2. 在 .env 中配置 BROWSER_CDP_URL。
+2. 在 `.env.example` 中配置 BROWSER_CDP_URL。
 3. 运行任务时，Agent 会连接这个已有 Chrome。
 ```
 
@@ -149,6 +143,21 @@ python -m app.main --task-file tasks/github.json
 python -m app.main --task-file tasks/weather.json
 ```
 
+也可以直接输入自然语言命令。程序会先调用同一个 VLM API，把命令转换成
+`tasks/task_template.json` 对应的任务 JSON，保存到 `outputs/generated_tasks/`，
+然后继续调用原来的 Agent 流程：
+
+```bash
+python -m app.main --command "把 在https://movie.douban.com/explore搜索流浪地球"
+```
+
+如果命令里不写网址，任务生成器会让模型根据目标自己推断起始网站：
+
+```bash
+python -m app.main --command "搜索电影流浪地球"
+python -m app.main --command "在 GitHub 页面上搜索开源项目 Qwen-VL"
+```
+
 运行结束后会生成：
 
 ```text
@@ -157,6 +166,7 @@ outputs/screenshots/<run_id>/step_02.png
 outputs/logs/<run_id>.json
 outputs/evaluations/runs.jsonl
 outputs/evaluations/runs.csv
+outputs/generated_tasks/<task_name>.json
 ```
 
 日志中会记录任务状态、每一步截图、模型决策、执行结果和最终回答。
@@ -282,4 +292,4 @@ outputs/evaluations/runs.csv
 
 ## 安全提醒
 
-真实 API Key 只应放在本地 `.env` 文件或服务器环境变量中，不要写进代码，也不要提交到仓库。历史密钥如果曾经出现在代码中，建议到模型服务平台重置。
+真实 API Key 当前会从 `.env.example` 读取；如果这个项目会提交到公开仓库，建议不要提交包含真实密钥的 `.env.example`，或改回使用本地 `.env`。历史密钥如果曾经出现在代码中，建议到模型服务平台重置。

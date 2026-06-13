@@ -71,7 +71,7 @@ class BrowserAgent:
                     result = execute_action(browser.page, action, observation["elements"])
 
                     if result.success and not result.should_finish:
-                        browser.page.wait_for_timeout(1000)
+                        self._wait_after_action(browser.page)
 
                     post_action_state = self._read_page_state(browser.page)
                     step_record = {
@@ -135,6 +135,14 @@ class BrowserAgent:
             url = None
 
         return {"url": url, "title": title}
+
+    @staticmethod
+    def _wait_after_action(page: Any) -> None:
+        page.wait_for_timeout(1000)
+        try:
+            page.wait_for_load_state("domcontentloaded", timeout=5000)
+        except Exception:
+            pass
 
     def _browser_mode(self) -> str:
         if self.settings.browser_cdp_url:

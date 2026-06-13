@@ -34,7 +34,7 @@ class Settings:
 
 
 def load_env_file(env_path: Path | None = None) -> None:
-    env_path = env_path or PROJECT_ROOT / ".env"
+    env_path = env_path or PROJECT_ROOT / ".env.example"
     if not env_path.exists():
         return
 
@@ -59,7 +59,7 @@ def get_settings(require_api_key: bool = True) -> Settings:
     api_key = os.getenv("VLM_API_KEY", "")
     if require_api_key and not api_key:
         raise RuntimeError(
-            "未找到 VLM_API_KEY。请复制 .env.example 为 .env，并填入自己的模型 API Key。"
+            "未找到 VLM_API_KEY。请在 .env.example 中填入自己的模型 API Key。"
         )
 
     settings = Settings(

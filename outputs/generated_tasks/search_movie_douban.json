@@ -1,0 +1,18 @@
+{
+  "name": "search_movie_douban",
+  "start_url": "https://movie.douban.com/explore",
+  "instruction": "在豆瓣电影探索页面搜索电影《流浪地球》，当搜索结果列表中出现该电影条目时视为任务完成。",
+  "max_steps": 6,
+  "evaluation": {
+    "suite": "basic_web_tasks",
+    "task_type": "search",
+    "difficulty": "easy",
+    "expected_result": "页面显示包含《流浪地球》的搜索结果列表，且能清晰看到电影标题、评分或海报等关键信息。",
+    "success_criteria": [
+      "页面URL包含搜索参数或处于搜索结果页状态",
+      "页面内容中包含《流浪地球》的电影条目",
+      "模型输出 finish",
+      "最终状态为 success"
+    ]
+  }
+}
