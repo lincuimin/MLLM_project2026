@@ -158,6 +158,32 @@ python -m app.main --command "搜索电影流浪地球"
 python -m app.main --command "在 GitHub 页面上搜索开源项目 Qwen-VL"
 ```
 
+## 启动网页界面
+
+如果希望通过浏览器输入任务并查看操作轨迹，可以启动本地 Web 控制台：
+
+```bash
+venv/bin/python -m app.web
+```
+
+然后打开：
+
+```text
+http://127.0.0.1:8000
+```
+
+网页界面会调用同一套 `run_command()` 流程：
+
+```text
+用户输入自然语言请求
+生成任务 JSON
+调用浏览器自动化
+保存日志、截图和评测记录
+返回 HTML 操作轨迹报告
+```
+
+任务结束后，页面会展示最终状态、失败类型、错误分析，并内嵌显示 `outputs/reports/<run_id>.html` 操作轨迹报告。
+
 运行结束后会生成：
 
 ```text
