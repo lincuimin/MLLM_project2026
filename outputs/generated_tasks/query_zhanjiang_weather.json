@@ -1,0 +1,18 @@
+{
+  "name": "query_zhanjiang_weather",
+  "start_url": "https://www.weather.com.cn/",
+  "instruction": "在天气网站上搜索并查询湛江市的当前天气情况，当页面显示湛江的实时天气信息（如温度、天气状况）时即可完成任务。",
+  "max_steps": 6,
+  "evaluation": {
+    "suite": "basic_web_tasks",
+    "task_type": "search",
+    "difficulty": "easy",
+    "expected_result": "页面展示湛江市的实时天气预报，包含气温、天气现象（如晴、雨等）及风力等信息。",
+    "success_criteria": [
+      "页面标题或内容明确显示“湛江”字样",
+      "页面展示湛江当前的温度和天气状况",
+      "模型输出 finish",
+      "最终状态为 success"
+    ]
+  }
+}

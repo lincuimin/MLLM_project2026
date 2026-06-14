@@ -13,6 +13,8 @@ test_baidu.png
 outputs/screenshots/*
 outputs/logs/*
 outputs/evaluations/*
+outputs/reports/*
 !outputs/screenshots/.gitkeep
 !outputs/logs/.gitkeep
 !outputs/evaluations/.gitkeep
+!outputs/reports/.gitkeep

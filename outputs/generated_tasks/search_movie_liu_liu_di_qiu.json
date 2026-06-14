@@ -1,0 +1,17 @@
+{
+  "name": "search_movie_liu_liu_di_qiu",
+  "start_url": "https://movie.douban.com/explore",
+  "instruction": "在豆瓣电影 Explore 页面搜索《流浪地球》，并确认最终页面展示了该电影的详细信息（如评分、简介或主演），此时任务完成。",
+  "max_steps": 6,
+  "evaluation": {
+    "suite": "basic_web_tasks",
+    "task_type": "search",
+    "difficulty": "easy",
+    "expected_result": "页面显示《流浪地球》的条目，包含电影海报、标题、评分和简要介绍。",
+    "success_criteria": [
+      "页面成功展示《流浪地球》的电影信息",
+      "模型输出 finish",
+      "最终状态为 success"
+    ]
+  }
+}

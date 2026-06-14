@@ -1,0 +1,18 @@
+{
+  "name": "search_qwen_vl_on_github",
+  "start_url": "https://github.com/",
+  "instruction": "在 GitHub 首页搜索框中输入 'Qwen-VL' 并执行搜索，直到搜索结果页面加载完成且显示出相关开源项目列表。",
+  "max_steps": 6,
+  "evaluation": {
+    "suite": "basic_web_tasks",
+    "task_type": "search",
+    "difficulty": "easy",
+    "expected_result": "页面跳转至 GitHub 搜索结果页，URL 包含搜索关键词，且页面内容显示与 'Qwen-VL' 相关的仓库列表。",
+    "success_criteria": [
+      "当前 URL 包含 '/search' 或搜索参数",
+      "页面标题包含搜索关键词 'Qwen-VL'",
+      "搜索结果列表中至少显示一个相关仓库",
+      "模型输出 finish"
+    ]
+  }
+}

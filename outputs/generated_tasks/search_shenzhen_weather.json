@@ -1,0 +1,18 @@
+{
+  "name": "search_shenzhen_weather",
+  "start_url": "https://www.weather.com.cn/",
+  "instruction": "在天气网站中搜索深圳的天气，当页面显示深圳当前天气状况及未来预报时视为完成。",
+  "max_steps": 6,
+  "evaluation": {
+    "suite": "basic_web_tasks",
+    "task_type": "search",
+    "difficulty": "easy",
+    "expected_result": "页面展示深圳的实时天气信息，包括温度、天气现象和未来几天的天气预报。",
+    "success_criteria": [
+      "页面标题或内容明确包含“深圳”字样",
+      "页面显示深圳当前的温度和天气状况",
+      "模型输出 finish",
+      "最终状态为 success"
+    ]
+  }
+}

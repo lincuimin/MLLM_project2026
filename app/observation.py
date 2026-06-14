@@ -1,22 +1,39 @@
 from __future__ import annotations
 
+import time
 from pathlib import Path
 from typing import Any
 
 
 def collect_observation(page: Any, screenshot_path: Path, max_elements: int = 80) -> dict[str, Any]:
-    elements = _collect_interactive_elements(page, max_elements=max_elements)
-    screenshot_path.parent.mkdir(parents=True, exist_ok=True)
-    _capture_annotated_screenshot(page, elements, screenshot_path)
+    last_error: Exception | None = None
+    for attempt in range(3):
+        try:
+            elements = _collect_interactive_elements(page, max_elements=max_elements)
+            screenshot_path.parent.mkdir(parents=True, exist_ok=True)
+            _capture_annotated_screenshot(page, elements, screenshot_path)
 
-    return {
-        "url": page.url,
-        "title": page.title(),
-        "viewport": _viewport_size(page),
-        "screenshot_path": str(screenshot_path),
-        "screenshot_type": "annotated",
-        "elements": elements,
-    }
+            return {
+                "url": page.url,
+                "title": page.title(),
+                "viewport": _viewport_size(page),
+                "screenshot_path": str(screenshot_path),
+                "screenshot_type": "annotated",
+                "elements": elements,
+            }
+        except Exception as exc:
+            last_error = exc
+            if not _is_navigation_context_error(exc) or attempt == 2:
+                break
+            try:
+                page.wait_for_load_state("domcontentloaded", timeout=5000)
+            except Exception:
+                page.wait_for_timeout(1000)
+            time.sleep(0.2)
+
+    if last_error:
+        raise last_error
+    raise RuntimeError("页面观察失败")
 
 
 def compact_observation_for_prompt(observation: dict[str, Any]) -> dict[str, Any]:
@@ -50,7 +67,19 @@ def _capture_annotated_screenshot(page: Any, elements: list[dict[str, Any]], scr
     try:
         page.screenshot(path=str(screenshot_path), full_page=False)
     finally:
-        _clear_element_overlay(page)
+        try:
+            _clear_element_overlay(page)
+        except Exception:
+            pass
+
+
+def _is_navigation_context_error(exc: Exception) -> bool:
+    message = str(exc)
+    return (
+        "Execution context was destroyed" in message
+        or "Cannot find context with specified id" in message
+        or "most likely because of a navigation" in message
+    )
 
 
 def _viewport_size(page: Any) -> dict[str, int]:

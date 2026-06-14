@@ -114,11 +114,14 @@ class VLMClient:
         except json.JSONDecodeError:
             pass
 
-        json_match = re.search(r"\{.*?\}", content, re.DOTALL)
-        if not json_match:
-            return {"action": "error", "reason": "模型没有输出 JSON"}
+        decoder = json.JSONDecoder()
+        for match in re.finditer(r"\{", content):
+            try:
+                parsed, _ = decoder.raw_decode(content[match.start() :])
+            except json.JSONDecodeError:
+                continue
 
-        try:
-            return json.loads(json_match.group())
-        except json.JSONDecodeError as exc:
-            return {"action": "error", "reason": f"JSON 解析失败: {exc}"}
+            if isinstance(parsed, dict):
+                return parsed
+
+        return {"action": "error", "reason": "模型没有输出 JSON"}

@@ -1,0 +1,18 @@
+{
+  "name": "taobao_search_fridge",
+  "start_url": "https://www.taobao.com",
+  "instruction": "在淘宝首页搜索框中输入'冰箱'并执行搜索，直到页面展示冰箱相关的商品列表。",
+  "max_steps": 6,
+  "evaluation": {
+    "suite": "basic_web_tasks",
+    "task_type": "search",
+    "difficulty": "easy",
+    "expected_result": "页面显示淘宝搜索结果页，URL包含关键词'冰箱'，且列表中展示了多个冰箱商品卡片。",
+    "success_criteria": [
+      "页面加载为淘宝搜索结果页",
+      "搜索结果中包含'冰箱'相关商品",
+      "模型输出 finish",
+      "最终状态为 success"
+    ]
+  }
+}
