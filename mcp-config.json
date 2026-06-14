@@ -1,0 +1,15 @@
+{
+    "mcpServers": {
+        "web-multimodal-agent": {
+            "command": "node",
+            "args": [
+                "dist/mcp-server.js"
+            ],
+            "env": {
+                "DEEPSEEK_API_KEY": "${DEEPSEEK_API_KEY}",
+                "QWEN_API_KEY": "${QWEN_API_KEY}",
+                "NODE_ENV": "production"
+            }
+        }
+    }
+}
